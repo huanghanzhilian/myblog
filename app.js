@@ -1,12 +1,12 @@
 /*
 * @Author: macintoshhd
 * @Date:   2018-05-25 16:59:26
-* @Last Modified by:   macintoshhd
-* @Last Modified time: 2018-05-25 17:49:33
+* @Last Modified by:   huanghanzhilian
+* @Last Modified time: 2018-07-05 23:49:31
 */
 
 
-var express = require('express');
+var express = require('express');   
 var app = express();
 var port = process.env.PORT || 3004; // 设置端口号：3004
 
