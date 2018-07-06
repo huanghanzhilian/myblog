@@ -1,0 +1,22 @@
+{
+  "name": "myblog",
+  "description": "my blob",
+  "main": "index.js",
+  "authors": [
+    "huanghanzhilian <1319639755@qq.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/huanghanzhilian/myblog",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "3.3.7"
+  }
+}
