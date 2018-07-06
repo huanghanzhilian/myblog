@@ -1,0 +1,25 @@
+.navbar .navbar-brand {
+    height: 64px;
+    line-height: 40px;
+}
+
+.navbar-brand>img {
+    width: 200px;
+    height: 64px;
+    margin-left: -14px;
+    margin-top: -15px;
+}
+
+.my-nav-pills>li>a {
+    font-size: 16px;
+    line-height: 64px;
+    padding: 0 13px;
+    border-bottom: 1px solid transparent;
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form{
+	border-color: transparent!important;
+}
+.navbar-form{
+	margin-top: 16px;
+}
