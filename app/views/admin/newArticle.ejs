@@ -1,0 +1,45 @@
+<%- include('../shared/header') %>
+    <%- include('../shared/navbarTop') %>
+        <div id="main" class="container">
+            <div class="row">
+                <div class="col-md-9" id="content">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">录入新文章</div>
+                        <div class="panel-body">
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
+                                    <div class="col-sm-5">
+                                        <input type="email" class="form-control" id="inputEmail3" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+                                    <div class="col-sm-5">
+                                        <input type="password" class="form-control" id="inputPassword3" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-5">
+                                        <button type="submit" class="btn btn-default btn-primary">登录</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3" id="sidebar">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">最新文章</div>
+                        <ul class="list-group">
+                            <li class="list-group-item">Cras justo odio</li>
+                            <li class="list-group-item">Dapibus ac facilisis in</li>
+                            <li class="list-group-item">Morbi leo risus</li>
+                            <li class="list-group-item">Porta ac consectetur ac</li>
+                            <li class="list-group-item">Vestibulum at eros</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- include('../shared/footer') %>

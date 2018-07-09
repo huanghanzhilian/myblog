@@ -64,5 +64,35 @@ module.exports = {
 
 
 
+# 知识点
+nodejs Express 4.x req.body req.query req.params 三种获取参数的方法
+
+第一种情况：http://localhost:3000/testparams/lixing，服务端代码这样写：
+
+router.get('/testparams/:anything', function (req, res) {
+res.send('anything is : ' + req.params.anything);
+})//这里的anything指的是你可以任意命名，以便使用req.params.XX获取参数
+
+在浏览器输入请求路径后页面返回：anything is : lixing
+ 
+
+第二种情况：http://localhost:3000/?id=1,用req.query.id,我们会得到 1，如果有两个或以上参数，用 & 连接，如：/?id=1&name=test,
+
+                 获取参数则是：req.query.id --> 1 , req.query.name - -> test .
+
+今天遇到一个情况，就是前端用JQuery get方法带参数请求，我这边获取的时候由于用的同一段获取的代码，req.query，
+
+取到的req.query 的值 :GET /tower?projectID=1&projectDeviceID=cfcf3d22-2d49-43aa-a607-9919c87700fa&ticket=0
+
+第三种情况：用Post方法向node服务器发送数据 id = 1，post('/login', {name: lixing})，node端获取参数则应该是：req.body.name.
+
+ 
+
+官网介绍：
+
+Checks route params (req.params), ex: /user/:id
+Checks query string params (req.query), ex: ?id=12
+Checks urlencoded body params (req.body), ex: id=
+
 
 
