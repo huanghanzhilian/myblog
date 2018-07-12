@@ -17,6 +17,8 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "3.3.7"
+    "bootstrap": "3.3.7",
+    "sb-admin-2": "*",
+    "font-awesome": "^5.1.0"
   }
 }

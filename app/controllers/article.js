@@ -8,10 +8,4 @@ exports.detail = function(req, res) {
     res.send('文章详情页')
 };
 
-// admin new page 后台录入页
-exports.new = function(req, res) {
-	res.render('admin/newArticle', {
-		title: '后台录入页'
-	});
-};
 
