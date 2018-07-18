@@ -20,6 +20,8 @@
 对应模块的用处
 
 1. `express`: web 框架
+2. `ejs`: 模板
+3. `mongoose`: MongoDB对象建模设计异步环境中工作
 1. `express-session`: session 中间件
 1. `connect-mongo`: 将 session 存储于 mongodb，结合 express-session 使用
 1. `moment`: 时间格式化
@@ -94,4 +96,3 @@ Checks route params (req.params), ex: /user/:id
 Checks query string params (req.query), ex: ?id=12
 Checks urlencoded body params (req.body), ex: id=
 
-mingtian

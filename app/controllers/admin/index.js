@@ -10,6 +10,15 @@ exports.new = function(req, res) {
         title: '文章录入页'
     });
 };
+
+// admin post article 后台录入提交  文章的保存
+exports.save = function(req, res) {
+    res.render('admin/newArticle', {
+        title: '文章录入页'
+    });
+};
+
+
 // admin categorymanage page 后台文章分类管理
 exports.categorymanage = function(req, res) {
     res.render('admin/categorymanage', {
