@@ -1,3 +1,5 @@
+var Article = require('../../models/article.js'); // 载入mongoose编译后的模型article
+
 // admin page 首页
 exports.adminIndex = function(req, res) {
     res.render('admin/index', {
@@ -13,9 +15,12 @@ exports.new = function(req, res) {
 
 // admin post article 后台录入提交  文章的保存
 exports.save = function(req, res) {
-    res.render('admin/newArticle', {
-        title: '文章录入页'
-    });
+    console.log(req.body)
+    // var articleObj = req.body.article || "";
+    // var _article = null;
+    // 新加的文章
+    //_movie = new Article(articleObj);
+    res.json({a:1});
 };
 
 
