@@ -1,7 +1,7 @@
 //引入mongoose建模工具模块
 var mongoose=require('mongoose');
 var Schema = mongoose.Schema
-//var ObjectId = Schema.Types.ObjectId
+var ObjectId = Schema.Types.ObjectId
 
 //声明一个MovieSchema调用mongoose的Schema方法传入对象
 var ArticleSchema=new mongoose.Schema({
@@ -9,6 +9,11 @@ var ArticleSchema=new mongoose.Schema({
 	title:String,
 	//内容
 	content:String,
+	//分类
+	category: {
+		type: ObjectId,
+		ref: 'category'
+	},
 	meta:{//录入数据或更新时，时间记录
 		createAt:{//创建时间
 			type:Date,//日期类型

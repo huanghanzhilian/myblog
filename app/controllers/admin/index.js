@@ -1,4 +1,6 @@
+var multer = require('multer');
 var Article = require('../../models/article.js'); // 载入mongoose编译后的模型article
+var Category = require('../../models/category');
 
 // admin page 首页
 exports.adminIndex = function(req, res) {
@@ -16,11 +18,31 @@ exports.new = function(req, res) {
 // admin post article 后台录入提交  文章的保存
 exports.save = function(req, res) {
     console.log(req.body)
-    // var articleObj = req.body.article || "";
-    // var _article = null;
+    var articleObj = req.body.article || "";
+    var categoryName=articleObj.categoryName;
+    var _article = null;
     // 新加的文章
-    //_movie = new Article(articleObj);
-    res.json({a:1});
+    _article = new Article(articleObj);
+    _article.save(function(err, article) {
+        if (err) {
+            console.log(err);
+        }
+        if(categoryName){
+            //新增视频标签
+            var category=new Category({
+                name:categoryName,
+                articles:[article._id]
+            });
+            category.save(function(err, category) {
+                article.category = category._id
+                article.save(function(err, article) {
+                	res.json({ a: '添加成功',b:article._id});
+                    // res.redirect('/movie/' + movie._id)
+                })
+            })
+        }
+    })
+    //res.json({ a: '添加成功' });
 };
 
 
@@ -36,4 +58,3 @@ exports.articlemanage = function(req, res) {
         title: '文章管理'
     });
 };
-

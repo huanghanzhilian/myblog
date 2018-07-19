@@ -4,6 +4,10 @@ var Article = require('../app/controllers/article');
 
 var Admin=require('../app/controllers/admin');
 
+
+var multer  = require('multer')
+var upload = multer({ dest: 'uploads/' })
+
 module.exports = function (app) {
   // Index
   app.get('/', Index.index)
