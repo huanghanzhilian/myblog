@@ -19,3 +19,11 @@ li{
 .navbar-top-links{
     margin-right: 0;
 }
+
+
+
+/*文本编辑*/
+.cate-select {
+  width: 188px;
+  float: left;
+  margin-right: 10px; }
