@@ -31,10 +31,11 @@
                         <div class="form-group">
                             <label for="category" class="col-md-1 control-label">商品名称</label>
                             <div class="col-md-5">
-                                <select type="password" id="category" name="article[category]" class="form-control cate-select col-md-5">
+                                <select type="password" id="category" name="article[categoryid]" class="form-control cate-select col-md-5">
                                     <option value="">请选择分类</option>
-                                    <!-- <option value="100001">10001</option>
-                                    <option value="100002">空调与电机</option> -->
+                                    <% categories.forEach(function(item) {%>
+                                    <option value="<%=item._id%>"><%=item.name%></option>
+                                    <% }) %>
                                 </select>
                             </div>
                         </div>

@@ -74,3 +74,8 @@ body {
 label{
   font-weight: normal;
 }
+
+
+.search-wrap {
+    margin-bottom: 20px;
+}

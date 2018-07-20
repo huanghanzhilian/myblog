@@ -24,7 +24,12 @@ module.exports = function (app) {
   app.get('/admin/home', Admin.adminIndex);//后台首页
   app.get('/admin/article/new', Admin.new);//后台文章录入页
   app.post('/admin/article/save', Admin.save);//后台文章录入页
+
   app.get('/admin/categorymanage', Admin.categorymanage);//后台文章分类管理
+  app.get('/admin/categorymanage/add', Admin.categorymanageAdd);//后台文章分类管理添加
+  app.post('/admin/categorymanage/save', Admin.categorymanageSave);//后台文章分类管理新建分类
+
+
   app.get('/admin/articlemanage', Admin.articlemanage);//后台文章管理
   
   // 404 page
