@@ -15,34 +15,42 @@
         </div>
         <div class="row">
             <div class="form-wrap col-lg-12">
-                <div class="form-horizontal">
-                    <div class="form-group">
-                        <label for="name" class="col-md-1 control-label">商品名称</label>
-                        <div class="col-md-5">
-                            <input type="text"
-                                class="form-control"
-                                name="name"
-                                id="name"
-                                placeholder="请输入商品名称"
-                                value="" />
+                <form id="create_topic_form" action="/admin/article/save" method="post">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="name" class="col-md-1 control-label">商品名称</label>
+                            <div class="col-md-5">
+                                <input type="text"
+                                    class="form-control"
+                                    name="article[title]"
+                                    id="name"
+                                    placeholder="请输入商品名称"
+                                    value="" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="category" class="col-md-1 control-label">商品名称</label>
+                            <div class="col-md-5">
+                                <select type="password" id="category" name="article[category]" class="form-control cate-select col-md-5">
+                                    <option value="">请选择分类</option>
+                                    <!-- <option value="100001">10001</option>
+                                    <option value="100002">空调与电机</option> -->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label">文章内容</label>
+                            <div id="editormd" class="col-md-9">
+                                <textarea class="textarea" name="article[content]" style="display: none;"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-5">
+                                <button type="submit" class="btn btn-default btn-primary">提交</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="name" class="col-md-1 control-label">商品名称</label>
-                        <div class="col-md-5">
-                            <select type="password" class="form-control cate-select col-md-5">
-                                <option value="">请选择一级品类</option><option value="100001">10001</option>
-                                <option value="100002">空调与电机</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div id="editormd">
-                            <textarea class="textarea" style="display:none;">### Hello Editor.md !</textarea>
-                        </div>
-                    </div>
-                    
-                </div>
+                </form>
             </div>
         </div>
     </div>

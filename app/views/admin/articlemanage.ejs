@@ -1,23 +1,70 @@
 <%- include('../shared/admin/header') %>
-<div class="wrapper">
-    <%- include('../shared/admin/navbarTop') %>
-    <div id="page-wrapper">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">文章管理</h1>
-                <div class="page-header-right">
+    <div class="wrapper">
+        <%- include('../shared/admin/navbarTop') %>
+            <div id="page-wrapper">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">文章管理</h1>
+                        <!-- <div class="page-header-right">
                     <a class="btn btn-primary" href="#/product.category/add">
                         <i class="fa fa-plus fa-fw"></i>
                         <span>添加品类</span>
                     </a>
+                </div> -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="search-wrap col-md-12">
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <select class="form-control">
+                                    <option value="productId">
+                                        按商品id查询
+                                    </option>
+                                    <option value="productName">
+                                        按商品名称查询
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="关键词">
+                            </div>
+                            <button type="button" class="btn btn-default">查询</button>
+                        </div>
+                    </div>
+                    <div class="table-wrap col-lg-12">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>信息</th>
+                                    <th>价格</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% articles.forEach(function(item) {%>
+                                <tr>
+                                    <td><%=item._id %></td>
+                                    <td>
+                                        <p><%=item.title %></p>
+                                    </td>
+                                    <td>9999</td>
+                                    <td>
+                                      <span>已下架</span>
+                                      <a class="btn btn-xs btn-warning opear" data-status="2">上架</a>
+                                    </td>
+                                    <td>
+                                      <a class="opear" href="#/product/detail/26">查看</a>
+                                      <a class="opear" href="#/product/save/26">编辑</a>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-3 col-md-6">
-                文章管理
-            </div>
-        </div>
     </div>
-</div>
-<%- include('../shared/admin/footer') %>
+    <%- include('../shared/admin/footer') %>

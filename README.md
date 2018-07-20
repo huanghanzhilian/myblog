@@ -96,3 +96,40 @@ Checks route params (req.params), ex: /user/:id
 Checks query string params (req.query), ex: ?id=12
 Checks urlencoded body params (req.body), ex: id=
 
+
+
+
+**dsfsafsd**
+
+*fsdfsdfsd*
+
+> sdgsagdg
+
+
+* fsdfsdfsdffsd
+
+
+
+1. dfdfds
+2. rere
+3. frt
+4. fwear
+5. [dfsdf](http://fsdafsrgr)
+
+```
+const config = {
+  // 启动端口
+  port: 3000,
+
+  // 数据库配置
+  database: {
+    DATABASE: 'nodesql',
+    USERNAME: 'root',
+    PASSWORD: '123456',
+    PORT: '3306',
+    HOST: 'localhost'
+  }
+}
+
+module.exports = config
+```
