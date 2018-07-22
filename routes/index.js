@@ -28,6 +28,7 @@ module.exports = function (app) {
 
   app.get('/admin/categorymanage', Admin.categorymanage);//后台文章分类管理
   app.get('/admin/categorymanage/add', Admin.categorymanageAdd);//后台文章分类管理添加
+  app.get('/admin/categorymanage/update/:id', Admin.categorymanageUpdate);//后台文章分类更新名称
   app.post('/admin/categorymanage/save', Admin.categorymanageSave);//后台文章分类管理新建分类
 
 

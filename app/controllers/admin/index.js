@@ -1,4 +1,6 @@
 var multer = require('multer');
+var _underscore = require('underscore'); // _.extend用新对象里的字段替换老的字段
+
 var Article = require('../../models/article.js'); // 载入mongoose编译后的模型article
 var Category = require('../../models/category');
 
@@ -27,11 +29,6 @@ exports.update = function(req, res) {
     if (id) {
         Article.findById(id, function(err, article) {
             Category.find({}, function(err, categories) {
-                // res.json({articles: article,categories:categories})
-                // return
-                console.log(article)
-                console.log('===========')
-                console.log(categories)
                 res.render('admin/newArticle', {
                     title: '文章更新',
                     articles: article,
@@ -44,7 +41,7 @@ exports.update = function(req, res) {
 
 //后台录入提交  文章的保存
 exports.save = function(req, res) {
-    console.log(req.body)
+    var id = req.body.article._id || "";
     var articleObj = req.body.article || "";
     var categoryId=articleObj.categoryid;
     var _article = null;
@@ -52,19 +49,35 @@ exports.save = function(req, res) {
         res.redirect('/admin/article/new');
         return;
     }
-    // 新加的文章
-    _article = new Article(articleObj);
-    _article.save(function(err, article) {
-        if (err) {
-            console.log(err);
-        }
-        Category.findById(categoryId, function(err, category) {
-            category.articles.push(article._id);
-            category.save(function(err, category) {
+    // 已经存在的数据
+    if(id){
+        Article.findById(id, function(err, article) {
+            if (err) {
+                console.log(err);
+            }
+            _article = _underscore.extend(article, articleObj); // 用新对象里的字段替换老的字段
+            _article.save(function(err, article) {
+                if (err) {
+                    console.log(err);
+                }
                 res.redirect('/admin/articlemanage');
+            });
+        });
+    }else{
+        // 新加的文章
+        _article = new Article(articleObj);
+        _article.save(function(err, article) {
+            if (err) {
+                console.log(err);
+            }
+            Category.findById(categoryId, function(err, category) {
+                category.articles.push(article._id);
+                category.save(function(err, category) {
+                    res.redirect('/admin/articlemanage');
+                })
             })
         })
-    })
+    }
 };
 
 
@@ -83,24 +96,59 @@ exports.categorymanage = function(req, res) {
 //后台文章分类管理添加
 exports.categorymanageAdd = function(req, res) {
     res.render('admin/categorymanageAdd', {
-        title: '添加分类'
+        title: '添加分类',
+        category:{}
     });
+};
+//分类修改名称
+exports.categorymanageUpdate = function(req, res) {
+    var id = req.params.id;
+    if (id) {
+        Category.findById(id, function(err, category) {
+            res.render('admin/categorymanageAdd', {
+                title: '修改分类',
+                category:category
+            });
+        });
+    }
+
 };
 
 //后台文章分类管理新建分类
 exports.categorymanageSave = function(req, res) {
+    var id = req.body._id || "";
     var categoryName=req.body.categoryname;
     var _category = null;
-    var category=new Category({
-        name:categoryName,
-        articles:[]
-    });
-    category.save(function(err, category) {
-        if (err) {
-            console.log(err);
-        }
-        res.redirect('/admin/categorymanage')
-    })
+
+    if(id){
+        Category.findById(id, function(err, category) {
+            if (err) {
+                console.log(err);
+            }
+            var categoryObj={
+                _id:id,
+                name:categoryName
+            }
+            _category = _underscore.extend(category, categoryObj); // 用新对象里的字段替换老的字段
+            _category.save(function(err, category) {
+                if (err) {
+                    console.log(err);
+                }
+                res.redirect('/admin/categorymanage')
+            });
+        });
+    }else{
+        var category=new Category({
+            name:categoryName,
+            articles:[]
+        });
+        category.save(function(err, category) {
+            if (err) {
+                console.log(err);
+            }
+            res.redirect('/admin/categorymanage')
+        })
+    }
 };
 
 
