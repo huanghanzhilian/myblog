@@ -88,49 +88,16 @@ exports.categorymanageSave = function(req, res) {
 
 // admin articlemanage page 后台文章管理
 exports.articlemanage = function(req, res) {
-    // Article
-    //     .find({})
-    //     .populate({
-    //         path: 'articles',
-    //         select: 'name'
-    //     })
-    //     .exec(function(err, articles) {
-    //         if (err) {
-    //             console.log(err)
-    //         }
-    //         res.json(articles)
-    //     })
-    // Category
-    //     .find({})
-    //     .populate({
-    //         path: 'articles',
-    //         select: 'title'
-    //     })
-    //     .exec(function(err, articles) {
-    //         if (err) {
-    //             console.log(err)
-    //         }
-    //         res.json(articles)
-    //     })
-
-        //return
-    Article.fetch(function(err, article) {
-        if (err) {
-            console.log(err);
-        }
-        console.log(article)
-
-
-
-        // Category.findById(category, function(err, category) {
-        //     category.articles.push(article._id);
-        //     category.save(function(err, category) {
-        //         res.redirect('/admin/articlemanage');
-        //     })
-        // })
-        res.render('admin/articlemanage', {
-            title: '文章管理',
-            articles: article
-        });
-    });
+    Article.find()
+        .populate('categoryid', 'name')
+        .exec(function(err, articles) {
+            if (err) {
+                console.log(err)
+            }
+            res.render('admin/articlemanage', {
+                title: '文章管理',
+                articles: articles
+            });
+            // res.json(articles)
+        })
 };

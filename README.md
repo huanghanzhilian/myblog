@@ -138,3 +138,5 @@ module.exports = config
 ```
 jixu 
 ```
+
+db.users.update({name:"admin"},{$set:{role:100}}, { multi: true });
