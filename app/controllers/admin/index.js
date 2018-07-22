@@ -15,9 +15,31 @@ exports.new = function(req, res) {
     Category.find({}, function(err, categories) {
         res.render('admin/newArticle', {
             title: '文章录入页',
+            articles: {},
             categories: categories
         })
     })
+};
+
+// 后台文章更新页
+exports.update = function(req, res) {
+    var id = req.params.id;
+    if (id) {
+        Article.findById(id, function(err, article) {
+            Category.find({}, function(err, categories) {
+                // res.json({articles: article,categories:categories})
+                // return
+                console.log(article)
+                console.log('===========')
+                console.log(categories)
+                res.render('admin/newArticle', {
+                    title: '文章更新',
+                    articles: article,
+                    categories:categories
+                });
+            })
+        });
+    }
 };
 
 //后台录入提交  文章的保存

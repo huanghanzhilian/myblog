@@ -20,21 +20,34 @@
                         <div class="form-group">
                             <label for="name" class="col-md-1 control-label">商品名称</label>
                             <div class="col-md-5">
-                                <input type="text"
-                                    class="form-control"
-                                    name="article[title]"
-                                    id="name"
-                                    placeholder="请输入商品名称"
-                                    value="" />
+                                <% if (articles._id) { %>
+                                    <input type="text"
+                                        class="form-control"
+                                        name="article[title]"
+                                        id="name"
+                                        placeholder="请输入商品名称"
+                                        value="<%=articles.title%>" />
+                                <% } else { %>
+                                    <input type="text"
+                                        class="form-control"
+                                        name="article[title]"
+                                        id="name"
+                                        placeholder="请输入商品名称"
+                                        value="" />
+                                <% } %>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="category" class="col-md-1 control-label">商品名称</label>
-                            <div class="col-md-5">
+                            <div class="col-md-5" data-pp="<%=articles.categoryid%>">
                                 <select type="password" id="category" name="article[categoryid]" class="form-control cate-select col-md-5">
                                     <option value="">请选择分类</option>
                                     <% categories.forEach(function(item) {%>
-                                    <option value="<%=item._id%>"><%=item.name%></option>
+                                        <% if (articles.categoryid) { %>
+                                            <option <%- articles.categoryid.toString()==item._id.toString()?selected="selected":''%>  value="<%=item._id%>"><%=item.name%></option>
+                                        <% } else { %>
+                                            <option value="<%=item._id%>"><%=item.name%></option>
+                                        <% } %>
                                     <% }) %>
                                 </select>
                             </div>
@@ -42,7 +55,7 @@
                         <div class="form-group">
                             <label class="col-md-1 control-label">文章内容</label>
                             <div id="editormd" class="col-md-9">
-                                <textarea class="textarea" name="article[content]" style="display: none;"></textarea>
+                                <textarea class="textarea" name="article[content]" style="display: none;"><%=articles.content%></textarea>
                             </div>
                         </div>
                         <div class="form-group">
