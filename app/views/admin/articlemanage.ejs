@@ -52,10 +52,9 @@
                                     <td>
                                         <p><%=item.title %></p>
                                     </td>
-                                    <td>9999</td>
+                                    <td><%=moment(item.meta.createAt).format('YYYY-MM-DD') %></td>
                                     <td>
-                                      <span>已下架</span>
-                                      <a class="btn btn-xs btn-warning opear" data-status="2">上架</a>
+                                      <%=moment(item.meta.updataAt).format('YYYY-MM-DD') %>
                                     </td>
                                     <td>
                                       <a class="opear" href="#/product/detail/26">查看</a>

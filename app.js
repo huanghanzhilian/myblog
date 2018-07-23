@@ -33,3 +33,4 @@ require('./routes')(app);
 app.listen(port, function () {
   console.log('listening on port'+port)
 })
+app.locals.moment = require('moment'); // 载入moment模块，格式化日期

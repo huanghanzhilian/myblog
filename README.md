@@ -22,9 +22,15 @@
 1. `express`: web 框架
 2. `ejs`: 模板
 3. `mongoose`: MongoDB对象建模设计异步环境中工作
+4. `markdown-it`: 编辑器转化
+5. `body-parser`: 将表单里的数据进行格式化
+6. `multer`: 图片上传组件 表单基于 multipart/form-data 类型
+7. `underscore`: `_.extend`用新对象里的字段替换老的字段
+8. `moment`: 时间格式化
+
 1. `express-session`: session 中间件
 1. `connect-mongo`: 将 session 存储于 mongodb，结合 express-session 使用
-1. `moment`: 时间格式化
+
 1. `config-lite`: 读取配置文件
 
 # 配置文件
