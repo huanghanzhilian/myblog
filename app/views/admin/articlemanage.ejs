@@ -71,45 +71,63 @@
                             </tbody>
                         </table>
                     </div>
-                    <nav aria-label="Page navigation" class="col-lg-12">
-                      <ul class="pagination">
-                        <li>
-                          <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                          </a>
-                          <!-- totalPage -->
-                        </li>
-                        <li><a>‹</a></li>
-                        <% for(var i=(pageNow-3>0?pageNow-4:0);i<(pageNow + 3 < totalPage?pageNow + 3 : totalPage);i++){ %>
-                            <% if (pageNow==i+1) { %>
-                                <li class="active"><a href="javascript:;"><%=i+1%></a></li>
-                            <% } else { %>
-                                <li><a href="/admin/articlemanage?p=<%=i+1%>"><%=i+1%></a></li>
+                    <% if (pageNow<=totalPage) { %>
+                        <nav aria-label="Page navigation" class="col-lg-12">
+                          <ul class="pagination">
+                            <% if (pageNow!=1) { %>
+                                <li>
+                                  <a href="/admin/articlemanage?p=1" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                  </a>
+                                </li>
+                            <% } %>
+                            <% if (hasPreviousPage) { %>
+                                <li><a href="/admin/articlemanage?p=<%=prePage%>">‹</a></li>
                             <% } %>
                             
-                        <% } %>
-                        
-                        <!-- <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li> -->
-                        <li><a>›</a></li>
-                        <li>
-                          <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                          </a>
-                        </li>
-                        <li>
-                            <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" style="float: left;min-width:40px;max-width:50px;">
-                        </li>
-                        <li>
-                            <button class="btn btn-primary" style="float: left;margin-left: 5px;">Go</button>
-                        </li>
-                        <span class="page-count">共 <%=recordAmount%>条记录，<%=totalPage%>页</span>
-                      </ul>
-                    </nav>
+                            <% for(var i=(pageNow-3>0?pageNow-4:0);i<(pageNow + 3 < totalPage?pageNow + 3 : totalPage);i++){ %>
+                                <% if (pageNow==i+1) { %>
+                                    <li class="active"><a href="javascript:;"><%=i+1%></a></li>
+                                <% } else { %>
+                                    <li><a href="/admin/articlemanage?p=<%=i+1%>"><%=i+1%></a></li>
+                                <% } %>
+                            <% } %>
+
+                            <% if (hasNextPage) { %>
+                                <li><a href="/admin/articlemanage?p=<%=nextPage%>">›</a></li>
+                            <% } %>
+
+                                
+                            <% if (pageNow!=totalPage) { %>
+                                <li>
+                                  <a href="/admin/articlemanage?p=<%=totalPage%>" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                  </a>
+                                </li>
+                            <% } else { %>
+                                
+                            <% } %>
+                            <li>
+                                <input id="topage" type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" style="float: left;min-width:40px;max-width:50px;">
+                            </li>
+                            <li>
+                                <button id="gopage" class="btn btn-primary" style="float: left;margin-left: 5px;">Go</button>
+                            </li>
+                            <span class="page-count">共 <%=recordAmount%>条记录，<%=totalPage%>页</span>
+                          </ul>
+                        </nav>
+                    <% } %>
                 </div>
             </div>
     </div>
     <%- include('../shared/admin/footer') %>
         <link rel="stylesheet" href="/css/component/rc-pagination.css">
+
+        <script type="text/javascript">
+            $("#gopage").on('click',function(){
+                var topage=$("#topage").val();
+                if(topage&&!isNaN(topage)){
+                    location.href='/admin/articlemanage?p='+topage;
+                }
+            })
+        </script>
