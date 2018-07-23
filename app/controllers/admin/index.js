@@ -158,16 +158,58 @@ exports.categorymanageSave = function(req, res) {
 
 // admin articlemanage page 后台文章管理
 exports.articlemanage = function(req, res) {
+    //拿到页码
+    var page = parseInt(req.query.p, 10) || 1;
+    var count = 1;//每一页只展示两条数据
+    var index = (page-1) * count
+
     Article.find()
         .populate('categoryid', 'name')
         .exec(function(err, articles) {
             if (err) {
                 console.log(err)
             }
+            var results = articles.slice(index, index + count);
+            var totalPage= Math.ceil(articles.length / count);//总页数
+            var hasPreviousPage=page!=1?true:false;//是否有上一页
+            var hasNextPage=page<totalPage;//是否有下一页
+            var prePage=page==1||page>totalPage?0:page-1;
+            var nextPage=page>=totalPage?0:page+1;
+            console.log({
+                title: '文章管理',
+                articles: results,
+                pageNow:page,
+                pageSize:count,
+                recordAmount:articles.length,
+                totalPage: totalPage,
+                hasPreviousPage:hasPreviousPage,
+                hasNextPage:hasNextPage,
+                prePage:prePage,
+                nextPage:nextPage,
+            })
             res.render('admin/articlemanage', {
                 title: '文章管理',
-                articles: articles
+                articles: results,
+                pageNow:page,
+                pageSize:count,
+                recordAmount:articles.length,
+                totalPage: totalPage,
+                hasPreviousPage:hasPreviousPage,
+                hasNextPage:hasNextPage,
+                prePage:prePage,
+                nextPage:nextPage,
             });
-            // res.json(articles)
+            // res.json({
+            //     title: '文章管理',
+            //     articles: results,
+            //     pageNow:page,
+            //     pageSize:count,
+            //     recordAmount:articles.length,
+            //     totalPage: totalPage,
+            //     hasPreviousPage:hasPreviousPage,
+            //     hasNextPage:hasNextPage,
+            //     prePage:prePage,
+            //     nextPage:nextPage,
+            // });
         })
 };
