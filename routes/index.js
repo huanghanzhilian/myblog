@@ -3,7 +3,7 @@ var User = require('../app/controllers/user');
 var Article = require('../app/controllers/article');
 
 var Admin=require('../app/controllers/admin');
-
+var Comment=require('../app/controllers/comment');
 
 var multer  = require('multer')
 var upload = multer({ dest: 'uploads/' })
@@ -25,8 +25,10 @@ module.exports = function (app) {
   //User
   app.get('/signup', User.showSignup);//注册页
   app.get('/signin', User.showSignin);//登录页
+  app.get('/logout', User.logout)
   app.post('/user/signup', User.signup);
-  app.post('/user/signin', User.signin)
+  app.post('/user/signin', User.signin);
+
 
 
   //article 文章相关
@@ -47,6 +49,12 @@ module.exports = function (app) {
 
   app.get('/admin/articlemanage',User.signinRequired, User.adminRequired, Admin.articlemanage);//后台文章管理
   
+
+
+  // Comment
+  app.post('/user/comment', User.signinRequired, Comment.save)
+
+
   // 404 page
   // app.use(function (req, res) {
   //   if (!res.headersSent) {

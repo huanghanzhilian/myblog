@@ -84,6 +84,13 @@ exports.signin = function(req, res) {
 	})
 }
 
+//logout
+exports.logout = function(req, res) {
+	delete req.session.user;
+	//delete app.locals.user;
+	res.redirect('/')
+}
+
 // midware for user  是否登入
 exports.signinRequired = function(req, res, next) {
 		var user = req.session.user

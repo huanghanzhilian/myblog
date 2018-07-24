@@ -2,6 +2,7 @@ var moment = require('moment');
 
 var Article = require('../models/article.js'); // 载入mongoose编译后的模型article
 var Category = require('../models/category');
+var Comment = require('../models/comment');
 
 const md = require('markdown-it')();
 
@@ -20,15 +21,22 @@ exports.detail = function(req, res) {
             if (err) {
                 console.log(err)
             }
-            console.log(article)
-            article.content=md.render(article.content);
-			res.render('web/article', {
-				createAt:moment(article.meta.createAt).format("YYYY-MM-DD"),
-	            title: article.title,
-	            content: article.content,
-	            contentType:article.categoryid.name,
-	            article:article
-	        });
+            Comment
+            .find({article: id})
+            .populate('from', 'name')
+            .populate('reply.to reply.from', 'name')
+            .exec(function(err, comments) {
+                console.log(comments)
+                article.content=md.render(article.content);
+                res.render('web/article', {
+                    createAt:moment(article.meta.createAt).format("YYYY-MM-DD"),
+                    title: article.title,
+                    content: article.content,
+                    contentType:article.categoryid.name,
+                    article:article,
+                    comments: comments
+                });
+            })
         })
 
 

@@ -18,11 +18,96 @@
                     </div>
 
                     <div class="panel panel-default">
-                        <div class="panel-heading topic_header">
-                            <span>0条评论</span>
+                        <div class="panel-heading topic_header" id="user_status" <%-user?'user_status=1':''%> >
+                            <span><%=comments.length%>条评论</span>
                         </div>
                         <div class="panel-body">
+                            <form style="margin-bottom: 20px" class="pl_wrap_main" action="/user/comment" method="post">
+                              <div class="pl_image_wrap_main">
+                                <img class="media-object" src="http://static.samuredwonder.com/image/user/head/FltDgsSj6K22VHRWQU8xPhzALdl7" width="45" height="45" alt="...">
+                              </div>
+                              <div class="pl_input_wrap">
+                                <input type="hidden" name="comment[article]" value="<%=article._id%>">
+                                <%if(user){%>
+                                  <input type="hidden" name="comment[from]" value="<%=user._id%>">
+                                <%}%>
+                                
+                                <textarea name="comment[content]" id="textarea"  class="style-scope iron-autogrow-textarea" rows="1" autocomplete="off" required="" maxlength="10000"></textarea>
+                                <button type="submit" class="btn btn-primary">提交</button>
+                              </div>
+                            </form>
                             <ul class="media-list">
+                              <% comments.forEach(function(item) {%>
+                                <li class="media">
+                                  <div class="pull-left">
+                                    <a href="#">
+                                      <img class="media-object" src="http://static.samuredwonder.com/image/user/head/FltDgsSj6K22VHRWQU8xPhzALdl7" width="45" height="45" alt="...">
+                                    </a>
+                                  </div>
+                                  <div class="media-body">
+                                    <h4 class="media-heading"><%=item.from.name%></h4>
+                                    <p><%=item.content%></p>
+                                    <p><span class="reply2_btn">回复</span></p>
+                                    <form class="pl_wrap" action="/user/comment" method="post">
+                                      <div class="pl_image_wrap">
+                                        <img class="media-object" src="http://static.samuredwonder.com/image/user/head/FltDgsSj6K22VHRWQU8xPhzALdl7" width="45" height="45" alt="...">
+                                      </div>
+                                      <div class="pl_input_wrap">
+                                        <input type="hidden" name="comment[article]" value="<%=article._id%>">
+                                        <%if(user){%>
+                                          <input type="hidden" name="comment[from]" value="<%=user._id%>">
+                                        <%}%>
+                                        
+                                        <input type="hidden" id="toId" name="comment[tid]" value="<%=item.from._id%>">
+                                        <input type="hidden" id="commentId" name="comment[cid]" value="<%=item._id%>">
+
+                                          <textarea id="textarea" name="comment[content]" class="style-scope iron-autogrow-textarea" rows="1" autocomplete="off" required="" maxlength="10000"></textarea>
+                                          <button type="submit" class="btn btn-primary">提交</button>
+                                      </div>
+                                    </form>
+
+                                    <% if(item.reply && item.reply.length > 0){ %>
+                                      <% item.reply.forEach(function(reply) {%>
+                                        <div class="media">
+                                          <div class="pull-left">
+                                            <a href="#">
+                                              <img class="media-object" src="http://static.samuredwonder.com/image/user/head/FltDgsSj6K22VHRWQU8xPhzALdl7" width="45" height="45" alt="...">
+                                            </a>
+                                          </div>
+                                          <div class="media-body">
+                                            <h4 class="media-heading">
+                                              <%=reply.from.name%><span class="text-info">&nbsp;reply&nbsp;</span><%=reply.to.name%>
+                                            </h4>
+                                            <p><%=reply.content%></p>
+                                            <p><span class="reply2_btn">回复</span></p>
+                                            <form class="pl_wrap" action="/user/comment" method="post">
+                                              <div class="pl_image_wrap">
+                                                <img class="media-object" src="http://static.samuredwonder.com/image/user/head/FltDgsSj6K22VHRWQU8xPhzALdl7" width="45" height="45" alt="...">
+                                              </div>
+                                              <div class="pl_input_wrap">
+                                                <input type="hidden" name="comment[article]" value="<%=article._id%>">
+                                                <%if(user){%>
+                                                  <input type="hidden" name="comment[from]" value="<%=user._id%>">
+                                                <%}%>
+                                                
+                                                <input type="hidden" id="toId" name="comment[tid]" value="<%=reply.from._id%>">
+                                                <input type="hidden" id="commentId" name="comment[cid]" value="<%=item._id%>">
+
+                                                  <textarea id="textarea" name="comment[content]" class="style-scope iron-autogrow-textarea" rows="1" autocomplete="off" required="" maxlength="10000"></textarea>
+                                                  <button type="submit" class="btn btn-primary">提交</button>
+                                              </div>
+                                            </form>
+                                          </div>
+                                        </div>
+                                      <%})%>
+                                    <% } %>
+
+                                  </div>
+                                </li>
+                              <%})%>
+                                
+                            </ul>
+                            <!-- <ul class="media-list">
                               <li class="media">
                                 <div class="pull-left">
                                   <a href="#">
@@ -33,6 +118,14 @@
                                   <h4 class="media-heading">Media heading</h4>
                                   <p>hello 你好</p>
                                   <p><span class="reply2_btn">回复</span></p>
+                                  <div class="pl_wrap">
+                                    <div class="pl_image_wrap">
+                                      <img class="media-object" src="http://static.samuredwonder.com/image/user/head/FltDgsSj6K22VHRWQU8xPhzALdl7" width="45" height="45" alt="...">
+                                    </div>
+                                    <div class="pl_input_wrap">
+                                        <textarea id="textarea" class="style-scope iron-autogrow-textarea" rows="1" autocomplete="off" required="" maxlength="10000"></textarea>
+                                    </div>
+                                  </div>
                                   <div class="media">
                                     <div class="pull-left">
                                       <a href="#">
@@ -43,19 +136,16 @@
                                       <h4 class="media-heading">Media heading</h4>
                                       <p>hello 你好</p>
                                       <p><span class="reply2_btn">回复</span></p>
+                                      <div class="pl_wrap">
+                                        <div class="pl_image_wrap">
+                                          <img class="media-object" src="http://static.samuredwonder.com/image/user/head/FltDgsSj6K22VHRWQU8xPhzALdl7" width="45" height="45" alt="...">
+                                        </div>
+                                        <div class="pl_input_wrap">
+                                            <textarea id="textarea" class="style-scope iron-autogrow-textarea" rows="1" autocomplete="off" required="" maxlength="10000"></textarea>
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
-
-
-                                  <div class="pl_wrap">
-                                      <div class="pl_image_wrap">
-                                        <img class="media-object" src="http://static.samuredwonder.com/image/user/head/FltDgsSj6K22VHRWQU8xPhzALdl7" width="45" height="45" alt="...">
-                                      </div>
-                                      <div class="pl_input_wrap">
-                                          <textarea id="textarea" class="style-scope iron-autogrow-textarea" rows="1" autocomplete="off" required="" maxlength="10000"></textarea>
-                                      </div>
-                                    </div>
-
 
                                 </div>
                               </li>
@@ -69,9 +159,17 @@
                                   <h4 class="media-heading">Media heading</h4>
                                   <p>hello 你好</p>
                                   <p><span class="reply2_btn">回复</span></p>
+                                  <div class="pl_wrap">
+                                    <div class="pl_image_wrap">
+                                      <img class="media-object" src="http://static.samuredwonder.com/image/user/head/FltDgsSj6K22VHRWQU8xPhzALdl7" width="45" height="45" alt="...">
+                                    </div>
+                                    <div class="pl_input_wrap">
+                                        <textarea id="textarea" class="style-scope iron-autogrow-textarea" rows="1" autocomplete="off" required="" maxlength="10000"></textarea>
+                                    </div>
+                                  </div>
                                 </div>
                               </li>
-                            </ul>
+                            </ul> -->
                         </div>
                     </div>
 

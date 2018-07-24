@@ -136,10 +136,25 @@ label{
 }
 .pl_input_wrap{
   margin-left: 50px;
+  position: relative;
 }
 
 .pl_input_wrap textarea{
-  width: 90%;
+  width: 100%;
   line-height: 25px;
   resize: none;
+}
+
+.pl_image_wrap_main{
+  width:45px;
+  height: 45px;
+  float: left;
+}
+.pl_wrap{
+  overflow: hidden;
+  display: none;
+}
+
+.pl_wrap_main{
+  overflow: hidden;
 }
