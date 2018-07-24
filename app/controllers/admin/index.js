@@ -160,7 +160,7 @@ exports.categorymanageSave = function(req, res) {
 exports.articlemanage = function(req, res) {
     //拿到页码
     var page = parseInt(req.query.p, 10) || 1;
-    var count = 5;//每一页只展示两条数据
+    var count = 10;//每一页只展示两条数据
     var index = (page-1) * count
 
     Article.find()
@@ -175,19 +175,7 @@ exports.articlemanage = function(req, res) {
             var hasNextPage=page<totalPage;//是否有下一页
             var prePage=page==1||page>totalPage?0:page-1;
             var nextPage=page>=totalPage?0:page+1;
-            // console.log({
-            //     title: '文章管理',
-            //     articles: results,
-            //     pageNow:page,
-            //     pageSize:count,
-            //     recordAmount:articles.length,
-            //     totalPage: totalPage,
-            //     hasPreviousPage:hasPreviousPage,
-            //     hasNextPage:hasNextPage,
-            //     prePage:prePage,
-            //     nextPage:nextPage,
-            // })
-            console.log(page)
+
             res.render('admin/articlemanage', {
                 title: '文章管理',
                 articles: results,

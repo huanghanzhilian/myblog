@@ -1,16 +1,20 @@
 const path = require('path');//路径
 const express = require('express');//web框架
+
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose'); // 加载mongoose模块
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const mongoStore = require('connect-mongo')(session); //会话持久
+
 var port = process.env.PORT || 3001; // 设置端口号：3001
-
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose'); // 加载mongoose模块
 var dbUrl = 'mongodb://localhost:27017/huangblog';
-mongoose.connect(dbUrl); // 连接mongodb本地数据库imovie
-console.log('MongoDB connection success!');
-
 
 const routes = require('./routes')
 const pkg = require('./package')
+
+mongoose.connect(dbUrl); // 连接mongodb本地数据库imovie
+console.log('MongoDB connection success!');
 
 const app = express()
 
@@ -25,7 +29,17 @@ app.set('views', path.join(__dirname, './app/views'))
 app.set('view engine', 'ejs')
 // 设置静态文件目录
 app.use(express.static(path.join(__dirname, 'public')))
-
+//session依赖于cookies
+app.use(cookieParser());
+app.use(session({
+    secret: 'huang',
+    store: new mongoStore({
+        url: dbUrl,
+        collection: 'sessions'
+    }),
+    resave: false,
+    saveUninitialized: true
+}));
 
 // 路由
 require('./routes')(app);

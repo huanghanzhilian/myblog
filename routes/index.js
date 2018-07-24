@@ -9,12 +9,25 @@ var multer  = require('multer')
 var upload = multer({ dest: 'uploads/' })
 
 module.exports = function (app) {
+
+  //pre handel user
+  app.use(function(req, res, next) {
+      var _user = req.session.user;
+      console.log(_user)
+      app.locals.user = _user;
+      return next();
+  })
+
+
   // Index
   app.get('/', Index.index)
 
   //User
   app.get('/signup', User.showSignup);//注册页
   app.get('/signin', User.showSignin);//登录页
+  app.post('/user/signup', User.signup);
+  app.post('/user/signin', User.signin)
+
 
   //article 文章相关
   app.get('/article/:id', Article.detail);//文章详情页

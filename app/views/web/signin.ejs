@@ -6,17 +6,17 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">登录</div>
                         <div class="panel-body">
-                            <form class="form-horizontal">
+                            <form class="form-horizontal" action="/user/signin" method="post">
                                 <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
+                                    <label for="name" class="col-sm-2 control-label">用户名</label>
                                     <div class="col-sm-5">
-                                        <input type="email" class="form-control" id="inputEmail3" placeholder="">
+                                        <input type="text" name="user[name]" class="form-control" id="name" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+                                    <label for="inputPassword" class="col-sm-2 control-label">密码</label>
                                     <div class="col-sm-5">
-                                        <input type="password" class="form-control" id="inputPassword3" placeholder="">
+                                        <input type="password" name="user[password]" class="form-control" id="inputPassword" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group">

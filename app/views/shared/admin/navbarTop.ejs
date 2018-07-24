@@ -17,11 +17,14 @@
             </a>
         </div>
         <ul class="nav navbar-top-links navbar-right">
-            <li class="dropDown">
-                <span>
-                    欢迎 admin
-                </span>
-            </li>
+            <% if(user){%>
+                <li class="dropDown">
+                    <span>
+                        欢迎 <%=user.name%>
+                    </span>
+                </li>
+            <%}%>
+                
             <li class="dropDown">
                 <a class="btn-logout" onClick={this.onLogout}>
                     退出

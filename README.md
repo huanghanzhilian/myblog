@@ -105,44 +105,11 @@ Checks urlencoded body params (req.body), ex: id=
 
 
 
-**dsfsafsd**
+疑问
 
-*fsdfsdfsd*
+cookie
+session
+会话持久
 
-> sdgsagdg
-
-
-* fsdfsdfsdffsd
-
-
-
-1. dfdfds
-2. rere
-3. frt
-4. fwear
-5. [dfsdf](http://fsdafsrgr)
-
-```
-const config = {
-  // 启动端口
-  port: 3000,
-
-  // 数据库配置
-  database: {
-    DATABASE: 'nodesql',
-    USERNAME: 'root',
-    PASSWORD: '123456',
-    PORT: '3306',
-    HOST: 'localhost'
-  }
-}
-
-module.exports = config
-```
-
-
-```
-jixu 
-```
-
-db.users.update({name:"admin"},{$set:{role:100}}, { multi: true });
+密码存储设计
+bcrypt

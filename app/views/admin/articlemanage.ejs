@@ -63,7 +63,7 @@
                                             <%=moment(item.meta.updataAt).format("YYYY-MM-DD HH:mm:ss") %>
                                         </td>
                                         <td>
-                                            <a class="opear" href="#/product/detail/26">查看</a>
+                                            <a class="opear" href="/article/<%=item._id %>" target="_blank">查看</a>
                                             <a class="opear" href="/admin/article/update/<%=item._id %>">编辑</a>
                                         </td>
                                     </tr>
@@ -84,7 +84,7 @@
                             <% if (hasPreviousPage) { %>
                                 <li><a href="/admin/articlemanage?p=<%=prePage%>">‹</a></li>
                             <% } %>
-                            
+
                             <% for(var i=(pageNow-3>0?pageNow-4:0);i<(pageNow + 3 < totalPage?pageNow + 3 : totalPage);i++){ %>
                                 <% if (pageNow==i+1) { %>
                                     <li class="active"><a href="javascript:;"><%=i+1%></a></li>
@@ -97,7 +97,7 @@
                                 <li><a href="/admin/articlemanage?p=<%=nextPage%>">›</a></li>
                             <% } %>
 
-                                
+
                             <% if (pageNow!=totalPage) { %>
                                 <li>
                                   <a href="/admin/articlemanage?p=<%=totalPage%>" aria-label="Next">
@@ -105,7 +105,7 @@
                                   </a>
                                 </li>
                             <% } else { %>
-                                
+
                             <% } %>
                             <li>
                                 <input id="topage" type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" style="float: left;min-width:40px;max-width:50px;">
