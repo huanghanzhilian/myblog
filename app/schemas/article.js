@@ -14,6 +14,10 @@ var ArticleSchema=new mongoose.Schema({
 		type: ObjectId,
 		ref: 'category'
 	},
+	pv: {
+		type: Number,
+		default:0//默认值创建的时间
+	},
 	meta:{//录入数据或更新时，时间记录
 		createAt:{//创建时间
 			type:Date,//日期类型

@@ -13,7 +13,7 @@ module.exports = function (app) {
   //pre handel user
   app.use(function(req, res, next) {
       var _user = req.session.user;
-      console.log(_user)
+      //console.log(_user)
       app.locals.user = _user;
       return next();
   })

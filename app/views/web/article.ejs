@@ -4,10 +4,78 @@
             <div class="row">
                 <div class="col-md-9" id="content">
                     <div class="panel panel-default">
-                        <div class="panel-body">
+                        <div class="panel-heading topic_header">
+                            <span class="topic_full_title"><%=title%></span>
+                            <div class="changes">
+                                <span> <%=createAt%></span>
+                                <span> <%=contentType%></span>
+                                <span> 阅读 <%=article.pv%> 次</span>
+                            </div>
+                        </div>
+                        <div class="panel-body" id="content_main">
                             <%- content %>
                         </div>
                     </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading topic_header">
+                            <span>0条评论</span>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="media-list">
+                              <li class="media">
+                                <div class="pull-left">
+                                  <a href="#">
+                                    <img class="media-object" src="http://static.samuredwonder.com/image/user/head/FltDgsSj6K22VHRWQU8xPhzALdl7" width="45" height="45" alt="...">
+                                  </a>
+                                </div>
+                                <div class="media-body">
+                                  <h4 class="media-heading">Media heading</h4>
+                                  <p>hello 你好</p>
+                                  <p><span class="reply2_btn">回复</span></p>
+                                  <div class="media">
+                                    <div class="pull-left">
+                                      <a href="#">
+                                        <img class="media-object" src="http://static.samuredwonder.com/image/user/head/FltDgsSj6K22VHRWQU8xPhzALdl7" width="45" height="45" alt="...">
+                                      </a>
+                                    </div>
+                                    <div class="media-body">
+                                      <h4 class="media-heading">Media heading</h4>
+                                      <p>hello 你好</p>
+                                      <p><span class="reply2_btn">回复</span></p>
+                                    </div>
+                                  </div>
+
+
+                                  <div class="pl_wrap">
+                                      <div class="pl_image_wrap">
+                                        <img class="media-object" src="http://static.samuredwonder.com/image/user/head/FltDgsSj6K22VHRWQU8xPhzALdl7" width="45" height="45" alt="...">
+                                      </div>
+                                      <div class="pl_input_wrap">
+                                          <textarea id="textarea" class="style-scope iron-autogrow-textarea" rows="1" autocomplete="off" required="" maxlength="10000"></textarea>
+                                      </div>
+                                    </div>
+
+
+                                </div>
+                              </li>
+                              <li class="media">
+                                <div class="pull-left">
+                                  <a href="#">
+                                    <img class="media-object" src="http://static.samuredwonder.com/image/user/head/FltDgsSj6K22VHRWQU8xPhzALdl7" width="45" height="45" alt="...">
+                                  </a>
+                                </div>
+                                <div class="media-body">
+                                  <h4 class="media-heading">Media heading</h4>
+                                  <p>hello 你好</p>
+                                  <p><span class="reply2_btn">回复</span></p>
+                                </div>
+                              </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
                 </div>
                 <div class="col-md-3" id="sidebar">
                     <div class="panel panel-default">
