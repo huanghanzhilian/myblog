@@ -34,18 +34,18 @@ module.exports = function (app) {
 
 
 
-  app.get('/admin/home', Admin.adminIndex);//后台首页
-  app.get('/admin/article/new', Admin.new);//后台文章录入页
-  app.get('/admin/article/update/:id', Admin.update);//重新更新文章
+  app.get('/admin/home',User.signinRequired, User.adminRequired,Admin.adminIndex);//后台首页
+  app.get('/admin/article/new',User.signinRequired, User.adminRequired, Admin.new);//后台文章录入页
+  app.get('/admin/article/update/:id',User.signinRequired, User.adminRequired, Admin.update);//重新更新文章
   app.post('/admin/article/save', Admin.save);//后台文章录入页
 
-  app.get('/admin/categorymanage', Admin.categorymanage);//后台文章分类管理
-  app.get('/admin/categorymanage/add', Admin.categorymanageAdd);//后台文章分类管理添加
-  app.get('/admin/categorymanage/update/:id', Admin.categorymanageUpdate);//后台文章分类更新名称
-  app.post('/admin/categorymanage/save', Admin.categorymanageSave);//后台文章分类管理新建分类
+  app.get('/admin/categorymanage',User.signinRequired, User.adminRequired, Admin.categorymanage);//后台文章分类管理
+  app.get('/admin/categorymanage/add',User.signinRequired, User.adminRequired, Admin.categorymanageAdd);//后台文章分类管理添加
+  app.get('/admin/categorymanage/update/:id',User.signinRequired, User.adminRequired, Admin.categorymanageUpdate);//后台文章分类更新名称
+  app.post('/admin/categorymanage/save',User.signinRequired, User.adminRequired, Admin.categorymanageSave);//后台文章分类管理新建分类
 
 
-  app.get('/admin/articlemanage', Admin.articlemanage);//后台文章管理
+  app.get('/admin/articlemanage',User.signinRequired, User.adminRequired, Admin.articlemanage);//后台文章管理
   
   // 404 page
   // app.use(function (req, res) {

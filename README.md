@@ -103,6 +103,10 @@ Checks query string params (req.query), ex: ?id=12
 Checks urlencoded body params (req.body), ex: id=
 
 
+# 数据更新
+db.users.update({name:"admin"},{$set:{role:50}})
+
+
 
 
 疑问
