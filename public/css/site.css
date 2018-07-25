@@ -158,3 +158,45 @@ label{
 .pl_wrap_main{
   overflow: hidden;
 }
+/*回复区域 e */
+
+
+/*通用连接样式 s */
+a.dark, a.topic_title {
+     text-overflow: ellipsis; 
+}
+a.topic_title {
+    max-width: 70%;
+    -o-text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 16px;
+    line-height: 30px;
+}
+a.dark, a.topic_title {
+    overflow: hidden;
+}
+
+#sidebar .topic_title {
+    max-width: 240px;
+    font-size: 14px;
+}
+.panel .list-group-item .read {
+    color: #778087;
+}
+.panel .list-group-item a {
+    color: #444;
+}
+.panel .pull-right{
+  line-height: 30px;
+}
+
+.category_name{
+  line-height: 30px;
+}
+.category_name a{
+  display: block;
+}
+
+/*通用连接样式 e */
