@@ -40,21 +40,13 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">个人分类</div>
                         <ul class="list-group">
-                            <li class="list-group-item">
-                              <a class="dark category_name" href="/topic/5b57d9618d66b90b2b738483" title="lazy-mock 一个快速生成后端模拟数据的懒人工具">lazy-mock
-                                <span class="pull-right">62篇</span>
-                              </a>
-                            </li>
-                            <li class="list-group-item">
-                              <a class="dark category_name" href="/topic/5b57d9618d66b90b2b738483" title="lazy-mock 一个快速生成后端模拟数据的懒人工具">lazy-mock
-                                <span class="pull-right">62篇</span>
-                              </a>
-                            </li>
-                            <li class="list-group-item">
-                              <a class="dark category_name" href="/topic/5b57d9618d66b90b2b738483" title="lazy-mock 一个快速生成后端模拟数据的懒人工具">lazy-mock
-                                <span class="pull-right">62篇</span>
-                              </a>
-                            </li>
+                            <% categorys.forEach(function(item) {%>
+                                <li class="list-group-item">
+                                  <a class="dark category_name" href="/topic/5b57d9618d66b90b2b738483" title="lazy-mock 一个快速生成后端模拟数据的懒人工具"><%=item.name%>
+                                    <span class="pull-right"><%=item.articles.length%>篇</span>
+                                  </a>
+                                </li>
+                            <% }) %>
                         </ul>
                     </div>
                     <div class="panel panel-default">
