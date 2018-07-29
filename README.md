@@ -108,6 +108,16 @@ db.users.update({name:"admin"},{$set:{role:50}})
 
 
 
+### mongoose操作
+
+```
+XXX.find({},null,{skip: 0, limit: 20, sort:{ "-createtime":1}}, function() {...});   
+
+Model.find(conditions, [fields], [options], [callback])
+```
+
+
+
 
 疑问
 
