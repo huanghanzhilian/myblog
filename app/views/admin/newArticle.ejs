@@ -40,6 +40,9 @@
                         <% if(articles._id){%>
                             <input type="hidden" name="article[_id]" value="<%=articles._id%>">
                         <%}%>
+                        <% if(articles.categoryid){%>
+                            <input type="hidden" name="article[beforeCategory]" value="<%=articles.categoryid%>">
+                        <%}%>
                         <div class="form-group">
                             <label for="category" class="col-md-1 control-label">商品名称</label>
                             <div class="col-md-5" data-pp="<%=articles.categoryid%>">

@@ -55,12 +55,27 @@ exports.save = function(req, res) {
             if (err) {
                 console.log(err);
             }
+            //找到之前关联的文章类型 将其删除
+            var beforeCategoryId=article._id;
             _article = _underscore.extend(article, articleObj); // 用新对象里的字段替换老的字段
             _article.save(function(err, article) {
                 if (err) {
                     console.log(err);
                 }
-                res.redirect('/admin/articlemanage');
+                //找到之前关联的文章类型 将其删除
+                Category.findByIdAndUpdate(
+                    articleObj.beforeCategory,
+                    { $pull: { 'articles':article._id}},function(err, beforeCategory) {
+                    if (err) {
+                        console.log(err);
+                    }
+                    Category.findById(categoryId, function(err, category) {
+                        category.articles.push(article._id);
+                        category.save(function(err, category) {
+                            res.redirect('/admin/articlemanage');
+                        })
+                    })
+                })
             });
         });
     }else{
