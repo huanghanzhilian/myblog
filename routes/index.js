@@ -30,6 +30,9 @@ module.exports = function (app) {
   app.post('/user/signin', User.signin);
 
 
+  // results
+  app.get('/results', Index.search)
+
 
   //article 文章相关
   app.get('/article/:id', Article.detail);//文章详情页

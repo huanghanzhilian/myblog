@@ -118,7 +118,7 @@
                         <ul class="list-group">
                             <% categorys.forEach(function(item) {%>
                                 <li class="list-group-item">
-                                  <a class="dark category_name" href="/topic/5b57d9618d66b90b2b738483" title="lazy-mock 一个快速生成后端模拟数据的懒人工具"><%=item.name%>
+                                  <a class="dark category_name" href="/results?cat=<%=item._id%>"><%=item.name%>
                                     <span class="pull-right"><%=item.articles.length%>篇</span>
                                   </a>
                                 </li>
