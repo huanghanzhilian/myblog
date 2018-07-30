@@ -200,3 +200,25 @@ a.dark, a.topic_title {
 }
 
 /*通用连接样式 e */
+
+
+
+/*分页 s */
+.page-count {
+    margin-left: 10px;
+    line-height: 32px;
+    vertical-align: top;
+}
+.pagination>li>a, .pagination>li>span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    margin: 0 4px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: none; 
+}
+/*分页 e */

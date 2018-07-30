@@ -117,7 +117,8 @@ Model.find(conditions, [fields], [options], [callback])
 ```
 
 
-
+### 并发测试
+ab -n1000 -c10 http://localhost:3001/
 
 疑问
 

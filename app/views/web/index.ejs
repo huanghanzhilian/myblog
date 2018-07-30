@@ -14,7 +14,7 @@
                                     </li>
                                     <% }) %>
                             </ul>
-                            <nav aria-label="Page navigation">
+                            <!-- <nav aria-label="Page navigation">
                                 <ul class="pagination">
                                     <li>
                                         <a href="#" aria-label="Previous">
@@ -32,7 +32,53 @@
                                       </a>
                                     </li>
                                 </ul>
-                            </nav>
+                            </nav> -->
+                            <% if (pageNow<=totalPage) { %>
+                                <nav aria-label="Page navigation" class="col-lg-12">
+                                  <ul class="pagination">
+                                    <% if (pageNow!=1) { %>
+                                        <li>
+                                          <a href="?p=1" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                          </a>
+                                        </li>
+                                    <% } %>
+                                    <% if (hasPreviousPage) { %>
+                                        <li><a href="?p=<%=prePage%>">‹</a></li>
+                                    <% } %>
+
+                                    <% for(var i=(pageNow-3>0?pageNow-4:0);i<(pageNow + 3 < totalPage?pageNow + 3 : totalPage);i++){ %>
+                                        <% if (pageNow==i+1) { %>
+                                            <li class="active"><a href="javascript:;"><%=i+1%></a></li>
+                                        <% } else { %>
+                                            <li><a href="?p=<%=i+1%>"><%=i+1%></a></li>
+                                        <% } %>
+                                    <% } %>
+
+                                    <% if (hasNextPage) { %>
+                                        <li><a href="?p=<%=nextPage%>">›</a></li>
+                                    <% } %>
+
+
+                                    <% if (pageNow!=totalPage) { %>
+                                        <li>
+                                          <a href="?p=<%=totalPage%>" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                          </a>
+                                        </li>
+                                    <% } else { %>
+
+                                    <% } %>
+                                    <li>
+                                        <input id="topage" type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" style="float: left;min-width:40px;max-width:50px;">
+                                    </li>
+                                    <li>
+                                        <button id="gopage" class="btn btn-primary" style="float: left;margin-left: 5px;">Go</button>
+                                    </li>
+                                    <span class="page-count">共 <%=recordAmount%>条记录，<%=totalPage%>页</span>
+                                  </ul>
+                                </nav>
+                            <% } %>
                         </div>
                     </div>
                 </div>
