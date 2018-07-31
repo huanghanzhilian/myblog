@@ -129,6 +129,7 @@ exports.manageGuestbookCh= function(req, res) {
   .exec(function(err, comments) {
     res.render('admin/manageGuestbookCh', {
         title: '二级留言管理',
+        commentsId:comments._id,
         comments:comments.reply
     });
   })
@@ -137,7 +138,7 @@ exports.manageGuestbookCh= function(req, res) {
 //删除一级留言列表
 exports.guestbookDel= function(req, res) {
   var id = req.query.id;
-  id(id){
+  if(id){
     Guestbook.remove({
         _id: id
     }, function(err, movie) {
@@ -148,6 +149,28 @@ exports.guestbookDel= function(req, res) {
                 success: 1
             });
         }
+    });
+  }
+};
+
+//删除二级留言列表
+exports.guestbookDelCh= function(req, res) {
+  var id = req.query.id;
+  var fid = req.query.fid;
+  if(id&&fid){
+    Guestbook.findByIdAndUpdate(
+      fid,
+      { $pull: { 'reply':{_id:id}}},function(err, guestbook) {
+      if (err) {
+          console.log(err);
+      }
+      res.json({
+          success: 1
+      });
+    })
+  }else{
+    res.json({
+        success: 0
     });
   }
 };

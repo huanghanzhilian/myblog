@@ -63,4 +63,7 @@ img {
     background-color: #fff;
     border: none; 
 }
+.no-data{
+    text-align: center;
+}
 /*分页 e */

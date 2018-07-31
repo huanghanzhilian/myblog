@@ -63,9 +63,9 @@ module.exports = function (app) {
   app.get('/guestbook', Guestbook.showGuestbook);
   app.post('/user/guestbook', User.signinRequired, Guestbook.save);
   app.get('/admin/guestbook',User.signinRequired, User.adminRequired, Guestbook.manageGuestbook);//一级评论管理页
-  app.delete('/admin/guestbook/list',User.signinRequired, User.adminRequired, Movie.guestbookDel);//删除一级留言列表
+  app.delete('/admin/guestbook/list',User.signinRequired, User.adminRequired, Guestbook.guestbookDel);//删除一级留言列表
   app.get('/admin/guestbook/children/:id',User.signinRequired, User.adminRequired, Guestbook.manageGuestbookCh);//二级评论管理页
-
+  app.delete('/admin/guestbookch/list',User.signinRequired, User.adminRequired, Guestbook.guestbookDelCh);//删除二级留言列表
 
   // 404 page
   // app.use(function (req, res) {

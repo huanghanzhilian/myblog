@@ -37,6 +37,7 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th>留言人</th>
                                     <th>内容</th>
                                     <th>发布时间</th>
                                     <th>操作</th>
@@ -52,6 +53,11 @@
                                         </td>
                                         <td>
                                             <p>
+                                                <%=item.from.name %>
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p>
                                                 <%=item.content %>
                                             </p>
                                         </td>
@@ -59,7 +65,7 @@
                                             <%=moment(item.meta.createAt).format("YYYY-MM-DD HH:mm:ss") %>
                                         </td>
                                         <td>
-                                            <a class="opear" href="/admin/guestbook/children/<%=item._id%>" target="_blank">查看二级评论</a>
+                                            <a class="opear" href="/admin/guestbook/children/<%=item._id%>">查看二级评论</a>
                                             <a class="opear" onclick="deleteItem('<%=item._id%>')" href="#">删除</a>
                                         </td>
                                     </tr>
@@ -112,6 +118,8 @@
                             <span class="page-count">共 <%=recordAmount%>条记录，<%=totalPage%>页</span>
                           </ul>
                         </nav>
+                    <% }else{ %>
+                        <p class="col-lg-12 no-data">暂无数据</p>
                     <% } %>
                 </div>
             </div>
@@ -129,17 +137,14 @@
             function deleteItem(id){
                 if (confirm("你确定删除吗？")) {
                     var tr = $('.item-id-' + id);
-                    console.log(id)
-                    return;
+                    //tr.remove();
                     $.ajax({
                         type: 'DELETE', // 异步请求类型：删除
                         url: '/admin/guestbook/list?id=' + id,
                     })
                     .done(function(results) {
                         if (results.success === 1) {
-                            if (tr.length > 0) {
-                                tr.remove();
-                            }
+                            location.reload();
                         }
                     });
                 }
