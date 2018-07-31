@@ -4,6 +4,7 @@ var Article = require('../app/controllers/article');
 
 var Admin=require('../app/controllers/admin');
 var Comment=require('../app/controllers/comment');
+var Guestbook=require('../app/controllers/guestbook');
 
 var multer  = require('multer')
 var upload = multer({ dest: 'uploads/' })
@@ -55,7 +56,15 @@ module.exports = function (app) {
 
 
   // Comment
-  app.post('/user/comment', User.signinRequired, Comment.save)
+  app.post('/user/comment', User.signinRequired, Comment.save);
+
+
+  //guestbook 留言
+  app.get('/guestbook', Guestbook.showGuestbook);
+  app.post('/user/guestbook', User.signinRequired, Guestbook.save);
+  app.get('/admin/guestbook',User.signinRequired, User.adminRequired, Guestbook.manageGuestbook);//一级评论管理页
+  app.delete('/admin/guestbook/list',User.signinRequired, User.adminRequired, Movie.guestbookDel);//删除一级留言列表
+  app.get('/admin/guestbook/children/:id',User.signinRequired, User.adminRequired, Guestbook.manageGuestbookCh);//二级评论管理页
 
 
   // 404 page

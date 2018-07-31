@@ -23,7 +23,7 @@ exports.detail = function(req, res) {
                 console.log(err)
             }
             Comment
-            .find({article: id})
+            .find({article: id},null,{sort:{_id:-1}})
             .populate('from', 'name')
             .populate('reply.to reply.from', 'name')
             .exec(function(err, comments) {
