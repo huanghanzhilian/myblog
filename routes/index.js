@@ -56,13 +56,16 @@ module.exports = function (app) {
 
 
   // Comment
-  app.post('/user/comment', User.signinRequired, Comment.save);
+  app.post('/user/comment', User.signinRequired, Comment.save);//评论文保存
+  app.get('/admin/comment',User.signinRequired, User.adminRequired, Comment.manageComment);//一级评论管理页
+    app.delete('/admin/comment/list',User.signinRequired, User.adminRequired, Comment.commentDel);//删除一级评论列表
+
 
 
   //guestbook 留言
-  app.get('/guestbook', Guestbook.showGuestbook);
-  app.post('/user/guestbook', User.signinRequired, Guestbook.save);
-  app.get('/admin/guestbook',User.signinRequired, User.adminRequired, Guestbook.manageGuestbook);//一级评论管理页
+  app.get('/guestbook', Guestbook.showGuestbook);//留言页面
+  app.post('/user/guestbook', User.signinRequired, Guestbook.save);//留言保存
+  app.get('/admin/guestbook',User.signinRequired, User.adminRequired, Guestbook.manageGuestbook);//一级留言管理页
   app.delete('/admin/guestbook/list',User.signinRequired, User.adminRequired, Guestbook.guestbookDel);//删除一级留言列表
   app.get('/admin/guestbook/children/:id',User.signinRequired, User.adminRequired, Guestbook.manageGuestbookCh);//二级评论管理页
   app.delete('/admin/guestbookch/list',User.signinRequired, User.adminRequired, Guestbook.guestbookDelCh);//删除二级留言列表
