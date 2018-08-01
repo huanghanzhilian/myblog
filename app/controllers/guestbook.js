@@ -127,6 +127,10 @@ exports.manageGuestbookCh= function(req, res) {
   .populate('from', 'name')
   .populate('reply.to reply.from', 'name')
   .exec(function(err, comments) {
+    if (err) {
+        res.redirect('admin/guestbook');
+    }
+    // res.json(comments)
     res.render('admin/manageGuestbookCh', {
         title: '二级留言管理',
         commentsId:comments._id,

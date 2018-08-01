@@ -43,7 +43,7 @@ exports.manageComment = function(req, res) {
         .populate('article', 'title')
         .populate('from', 'name')
         .exec(function(err, comments) {
-            console.log(comments)
+            //console.log(comments)
             var results = comments.slice(index, index + count);
             var totalPage = Math.ceil(comments.length / count); //总页数
             var hasPreviousPage = page != 1 ? true : false; //是否有上一页
