@@ -64,7 +64,7 @@
                                             <%=moment(item.meta.createAt).format("YYYY-MM-DD HH:mm:ss") %>
                                         </td>
                                         <td>
-                                            <a class="opear" href="/admin/guestbook/children/<%=item._id%>">查看二级评论</a>
+                                            <a class="opear" href="/admin/comment/children/<%=item._id%>">查看二级评论</a>
                                             <a class="opear" onclick="deleteItem('<%=item._id%>')" href="#">删除</a>
                                         </td>
                                     </tr>
@@ -147,12 +147,5 @@
                         }
                     });
                 }
-                else {
-                    
-                }
-
             }
-            // $('#myModal').modal({
-            //   keyboard: false
-            // })
         </script>

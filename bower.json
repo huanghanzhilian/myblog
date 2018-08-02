@@ -19,6 +19,7 @@
   "dependencies": {
     "bootstrap": "3.3.7",
     "sb-admin-2": "*",
-    "font-awesome": "^5.1.0"
+    "font-awesome": "^5.1.0",
+    "switchery": "^0.8.2"
   }
 }

@@ -84,3 +84,46 @@ exports.commentDel= function(req, res) {
   }
 };
 
+//二级评论管理页
+exports.manageCommentCh= function(req, res) {
+  var id = req.params.id;
+  Comment
+  .findById(id)
+  .populate('from', 'name')
+  .populate('reply.to reply.from', 'name')
+  .exec(function(err, comments) {
+    if (err) {
+        console.log(err)
+        res.redirect('admin/comment');
+    }
+    // res.json(comments)
+    res.render('admin/manageCommentCh', {
+        title: '二级评论管理',
+        commentsId:comments._id,
+        comments:comments.reply
+    });
+  })
+};
+
+//删除二级评论列表
+exports.commentDelCh= function(req, res) {
+  var id = req.query.id;
+  var fid = req.query.fid;
+  if(id&&fid){
+    Comment.findByIdAndUpdate(
+      fid,
+      { $pull: { 'reply':{_id:id}}},function(err, comment) {
+      if (err) {
+          console.log(err);
+      }
+      res.json({
+          success: 1
+      });
+    })
+  }else{
+    res.json({
+        success: 0
+    });
+  }
+};
+
