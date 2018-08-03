@@ -23,26 +23,30 @@
                                                     <li class="list-group-item clearfix">
                                                         <div class="pull-left">网站名称</div>
                                                         <div class="pull-right">
-                                                            <input id="sitename" type="text" name="settings[sitename]" placeholder="该网站的名称" value="iBlog" class="form-control">
+                                                            <input id="sitename" type="text" name="settings[sitename]" placeholder="该网站的名称" value="<%=settings.sitename%>" class="form-control">
                                                         </div>
                                                     </li>
                                                     <li class="list-group-item clearfix">
                                                         <div class="pull-left">网站域名</div>
                                                         <div class="pull-right">
-                                                            <input id="sitedomain" type="text" name="settings[sitedomain]" placeholder="该网站的域名" value="iBlog" class="form-control">
+                                                            <input id="sitedomain" type="text" name="settings[sitedomain]" placeholder="该网站的域名" value="<%=settings.sitedomain%>" class="form-control">
                                                         </div>
                                                     </li>
                                                     <li class="list-group-item clearfix">
                                                         <div class="pull-left">备案号（用于底部显示）</div>
                                                         <div class="pull-right">
-                                                            <input id="recordno" type="text" name="settings[recordno]" placeholder="网站域名的备案号" value="iBlog" class="form-control">
+                                                            <input id="recordno" type="text" name="settings[recordno]" placeholder="网站域名的备案号" value="<%=settings.recordno%>" class="form-control">
                                                         </div>
                                                     </li>
                                                     <li class="list-group-item clearfix">
                                                         <div class="pull-left">qq群图片</div>
                                                         <div class="pull-right">
                                                             <span class="fileinput-button">
-                                                                <img alt="profile" src="http://www.huanghanlian.com/assets/images/ertw.png" style="width:146px;height:146px;" class="profile-img">
+                                                                <%if(settings.fileupload){%>
+                                                                    <img alt="profile" src="<%=settings.fileupload%>" style="width:146px;height:146px;" class="profile-img">
+                                                                <%}else{%>
+                                                                    <i class="icontoolbar add-image-btn fa fa-plus profile-i-item"></i>
+                                                                <%}%>
                                                                 <input type="file" name="fileupload" id="fileupload" class="fileupload" />
                                                             </span>
                                                         </div>
@@ -50,8 +54,8 @@
                                                     <li class="list-group-item clearfix">
                                                         <div class="pull-left">是否开启qq群展示</div>
                                                         <div class="pull-right">
-                                                            <input id="qqfileshow" type="hidden" name="settings[qqfileshow]" value="" />
-                                                            <input type="checkbox" checked="" class="js-switch" />
+                                                            <input id="qqfileshow" type="hidden" name="settings[qqfileshow]" value="<%=settings.qqfileshow%>" />
+                                                            <input type="checkbox" <%- settings.qqfileshow==true?'checked="true"':''%> class="js-switch" />
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -97,7 +101,7 @@
             var regex = /^([a-zA-Z0-9\s_\\.\-:\u4e00-\u9fa5])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
             var file = $('#fileupload')[0].files[0];
             var filemaxsize = 1024 * 900; //900kb
-            var fileminsize = 1024 * 30; //30kb
+            var fileminsize = 1024 * 1; //30kb
 
             console.log(file)
             if (file.size > filemaxsize || file.size < fileminsize) {
@@ -134,11 +138,15 @@
                 data: formData,//$("#postForm").serialize(),
                 contentType: false,
                 processData: false,
-                success: function() {
-
+                success: function(res) {
+                    if(res.success){
+                        alert('保存成功')
+                    }else{
+                        alert('保存失败')
+                    }
                 },
                 error: function() {
-
+                    alert('保存失败')
                 },
                 complete: function() {
                     $this.removeAttr("disabled");

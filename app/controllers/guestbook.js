@@ -2,6 +2,7 @@ var Guestbook = require('../models/guestbook'); // 载入mongoose编译后的模
 var Article = require('../models/article.js'); // 载入mongoose编译后的模型article
 var Category = require('../models/category');
 var Comment = require('../models/comment');
+var Settings = require('../models/settings');
 
 // 留言
 exports.showGuestbook = function(req, res) {
@@ -22,14 +23,15 @@ exports.showGuestbook = function(req, res) {
               Comment.find({},null,{limit: 5,sort:{_id:-1}})											                       //获取最新评论文章
               .populate('article', 'title')
               .populate('from', 'name')
-              .populate('reply.to reply.from', 'name')
+              .populate('reply.to reply.from', 'name'),
+              Settings.find({})
             ])
             .then(function(data) {
                 var newests = data[0];        //获取最新文章
                 var categorys = data[1];      //获取所有分类
                 var hottests=data[2];         //获取最热文章
                 var newComments=data[3];      //获取最新评论文章
-
+                var settings = data[4][0]||{};//得到网站配置信息
 
                 var results = comments.slice(index, index + count);
 		            var totalPage= Math.ceil(comments.length / count);//总页数
@@ -54,6 +56,8 @@ exports.showGuestbook = function(req, res) {
 	                hasNextPage:hasNextPage,
 	                prePage:prePage,
 	                nextPage:nextPage,
+
+                  config: settings,//得到网站配置信息
 						    });
             });
         })

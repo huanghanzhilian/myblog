@@ -1,7 +1,9 @@
 .clearfix {
-    *zoom:1}
+    *zoom: 1
+}
 
-.clearfix:before,.clearfix:after {
+.clearfix:before,
+.clearfix:after {
     display: table;
     content: "";
     line-height: 0
@@ -11,35 +13,42 @@
     clear: both
 }
 
-li{
+li {
     list-style: none;
 }
-.navbar-default{
+
+.navbar-default {
     margin-bottom: 0;
 }
-.btn-logout{
+
+.btn-logout {
     cursor: pointer;
 }
-.page-header{
+
+.page-header {
     margin: 20px 0 20px;
     font-size: 28px;
     color: #666;
 }
-.page-header-right{
+
+.page-header-right {
     float: right;
     margin-top: -63px;
 }
-.navbar-top-links{
+
+.navbar-top-links {
     margin-right: 0;
 }
 
 
 
+
 /*文本编辑*/
+
 .cate-select {
-  width: 188px;
-  float: left;
-  margin-right: 10px; 
+    width: 188px;
+    float: left;
+    margin-right: 10px;
 }
 
 
@@ -58,13 +67,17 @@ img {
 
 
 
+
 /*分页 s */
+
 .page-count {
     margin-left: 10px;
     line-height: 32px;
     vertical-align: top;
 }
-.pagination>li>a, .pagination>li>span {
+
+.pagination>li>a,
+.pagination>li>span {
     position: relative;
     float: left;
     padding: 6px 12px;
@@ -74,38 +87,57 @@ img {
     color: #337ab7;
     text-decoration: none;
     background-color: #fff;
-    border: none; 
+    border: none;
 }
-.no-data{
+
+.no-data {
     text-align: center;
 }
+
+
 /*分页 e */
 
+
 /*admin 设置区域 s */
+
 .panel-collapse .list-group-item {
     line-height: 34px;
 }
-.js-switch{
+
+.js-switch {
     display: none;
 }
-.fileinput-button{
+
+.fileinput-button {
     position: relative;
     display: block;
 }
-.fileinput-button .fileupload{
+
+.profile-i-item {
+    width: 146px;
+    height: 146px;
+    font-size: 40px;
+    text-align: center;
+    line-height: 146px;
+    background-color: #f8f8f8;
+    color: #ccc;
+}
+
+.fileinput-button .fileupload {
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
-    left:0;
+    left: 0;
     opacity: 0;
     -ms-filter: 'alpha(opacity=0)';
     cursor: pointer;
 }
+
+
 /*admin 设置区域 e */
 
-
-.ajax-post{
+.ajax-post {
     display: block;
     margin-bottom: 20px;
 }

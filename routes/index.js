@@ -74,9 +74,10 @@ module.exports = function (app) {
 
   //settings 系统设置
   app.get('/admin/settings',User.signinRequired, User.adminRequired, Settings.showSettings);//系统设置页
-  app.post('/admin/saveSettings', User.signinRequired, Settings.saveSettings);//系统设置保存
-  //upload.single('fileupload'),
-  app.get('/admin/test', Settings.test);
+  app.post('/admin/saveSettings', User.signinRequired, Settings.savePoster,Settings.saveSettings);//系统设置保存
+
+
+
 
   // 404 page
   // app.use(function (req, res) {

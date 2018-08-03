@@ -4,6 +4,7 @@ var Promise=require('bluebird')
 var Article = require('../models/article.js'); // 载入mongoose编译后的模型article
 var Category = require('../models/category');
 var Comment = require('../models/comment');
+var Settings = require('../models/settings');
 
 const md = require('markdown-it')();
 
@@ -34,7 +35,8 @@ exports.detail = function(req, res) {
                   Comment.find({},null,{limit: 5,sort:{_id:-1}})
                   .populate('article', 'title')
                   .populate('from', 'name')
-                  .populate('reply.to reply.from', 'name')
+                  .populate('reply.to reply.from', 'name'),
+                  Settings.find({})
                 ])
                 .then(function(data) {
                   //console.log(data[0])
@@ -43,14 +45,11 @@ exports.detail = function(req, res) {
                   var newests = articles.slice(0, 5);
                   var hottests=data[2];
                   var newComments=data[3];
-                  // res.render('web/index', {
-                  //     title: '首页',
-                  //     articles: articles,
-                  //     categorys:categorys,
-                  //     newests:newests,
-                  //     hottests:hottests
-                  // });
+
+                  var settings = data[4][0]||{};//得到网站配置信息
+                  
                   article.content=md.render(article.content);
+                  console.log(article.content)
                   res.render('web/article', {
                       createAt:moment(article.meta.createAt).format("YYYY-MM-DD"),
                       title: article.title,
@@ -63,7 +62,9 @@ exports.detail = function(req, res) {
                       categorys:categorys,
                       newests:newests,
                       hottests:hottests,
-                      newComments:newComments
+                      newComments:newComments,
+
+                      config: settings,//得到网站配置信息
                   });
 
                 })
@@ -73,27 +74,6 @@ exports.detail = function(req, res) {
             })
         })
 
-
-	// Article.findById(id, function(err, movie) {
- //        Comment
- //        .find({movie: id})
- //        .populate('from', 'name')
- //        .populate('reply.to reply.from', 'name')
- //        .exec(function(err, comments) {
- //            console.log(comments)
- //            res.render('detail', {
- //                title: 'i_movie' + movie.title,
- //                movie: movie,
- //                comments: comments
- //            });
- //        })
- //    });
-
-
-
-	// console.log(req.params)
-	// console.log(req.query)
-    
 };
 
 

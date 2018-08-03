@@ -1,6 +1,7 @@
 var Article = require('../models/article.js'); // 载入mongoose编译后的模型article
 var Category = require('../models/category');
 var Comment = require('../models/comment');
+var Settings = require('../models/settings');
 
 var Promise = require('bluebird')
 const md = require('markdown-it')();
@@ -18,7 +19,8 @@ exports.index = function(req, res) {
             Comment.find({}, null, { limit: 5, sort: { _id: -1 } })
             .populate('article', 'title')
             .populate('from', 'name')
-            .populate('reply.to reply.from', 'name')
+            .populate('reply.to reply.from', 'name'),
+            Settings.find({})
         ])
         .then(function(data) {
             //console.log(data[0])
@@ -27,7 +29,7 @@ exports.index = function(req, res) {
             var newests = articles.slice(0, 5);
             var hottests = data[2];
             var newComments = data[3];
-
+            var settings = data[4][0]||{};//得到网站配置信息
 
             var results = articles.slice(index, index + count);
             var totalPage= Math.ceil(articles.length / count);//总页数
@@ -53,6 +55,8 @@ exports.index = function(req, res) {
                 hasNextPage:hasNextPage,
                 prePage:prePage,
                 nextPage:nextPage,
+
+                config: settings,//得到网站配置信息
             });
         })
 
@@ -99,7 +103,8 @@ exports.search = function(req, res) {
                     Comment.find({}, null, { limit: 5, sort: { _id: -1 } })
                     .populate('article', 'title')
                     .populate('from', 'name')
-                    .populate('reply.to reply.from', 'name')
+                    .populate('reply.to reply.from', 'name'),
+                    Settings.find({})
                 ])
                 .then(function(data) {
                     var articles=articlesbox[0].articles;
@@ -107,6 +112,7 @@ exports.search = function(req, res) {
                     var newests = articles.slice(0, 5);
                     var hottests = data[1];
                     var newComments = data[2];
+                    var settings = data[3][0]||{};//得到网站配置信息
 
 
                     var results = articles.slice(index, index + count);
@@ -136,6 +142,8 @@ exports.search = function(req, res) {
                         hasNextPage:hasNextPage,
                         prePage:prePage,
                         nextPage:nextPage,
+
+                        config: settings,//得到网站配置信息
                     });
                 })
             })
@@ -150,15 +158,17 @@ exports.search = function(req, res) {
             Comment.find({}, null, { limit: 5, sort: { _id: -1 } })
             .populate('article', 'title')
             .populate('from', 'name')
-            .populate('reply.to reply.from', 'name')
+            .populate('reply.to reply.from', 'name'),
+            Settings.find({})
         ])
         .then(function(data) {
-            console.log(data[0])
             var articles = data[0];
             var categorys = data[1];
             var newests = articles.slice(0, 5);
             var hottests = data[2];
             var newComments = data[3];
+            var settings = data[4][0]||{};//得到网站配置信息
+
 
 
             var results = articles.slice(index, index + count);
@@ -185,6 +195,8 @@ exports.search = function(req, res) {
                 hasNextPage:hasNextPage,
                 prePage:prePage,
                 nextPage:nextPage,
+
+                config: settings,//得到网站配置信息
             });
         })
 
