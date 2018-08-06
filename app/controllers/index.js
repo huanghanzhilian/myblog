@@ -37,7 +37,7 @@ exports.index = function(req, res) {
             var hasNextPage=page<totalPage;//是否有下一页
             var prePage=page==1||page>totalPage?0:page-1;
             var nextPage=page>=totalPage?0:page+1;
-
+            console.log(results)
             res.render('web/index', {
                 title: '首页',
 
@@ -87,7 +87,7 @@ exports.search = function(req, res) {
             })
             .populate({
                 path: 'articles',
-                select: 'title',
+                select: 'title pv meta',
                 /*options: {
                     limit: 2,
                     skip:index
@@ -116,8 +116,7 @@ exports.search = function(req, res) {
 
 
                     var results = articles.slice(index, index + count);
-                    console.log(results)
-                    console.log(results.length)
+
 
                     var totalPage= Math.ceil(articles.length / count);//总页数
                     var hasPreviousPage=page!=1?true:false;//是否有上一页

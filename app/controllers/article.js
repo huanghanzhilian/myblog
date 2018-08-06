@@ -9,20 +9,25 @@ var Settings = require('../models/settings');
 const md = require('markdown-it')();
 
 // detail page 文章详情页
-exports.detail = function(req, res) {
+exports.detail = function(req, res,next) {
 	var id = req.params.id;
-	//每次访问更新pv
-    Article.update({_id: id}, {$inc: {pv: 1}}, function(err) {
-        if (err) {
-            console.log(err)
-        }
-    })
+	  
     Article.findById(id)
     	.populate('categoryid', 'name')
         .exec(function(err, article) {
             if (err) {
-                console.log(err)
+              console.log('22222222222222')
+              return next(err)
+              
             }
+             //每次访问更新pv
+    Article.update({_id: id}, {$inc: {pv: 1}}, function(err) {
+        if (err) {
+          console.log('111111111111111')
+           return next(err)
+        }
+    })
+            console.log('===========2222222222=======')
             Comment
             .find({article: id},null,{sort:{_id:-1}})
             .populate('from', 'name')

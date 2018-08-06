@@ -9,10 +9,15 @@
                                 <% articles.forEach(function(item) {%>
                                     <li class="list-group-item">
                                         <a href="/article/<%= item._id %>">
-                                            <%=item.title %>
+                                            <p class="article-title"><%=item.title %></p>
+                                            <div class="changes">
+                                                <span> <%=item.categoryid.name %></span>
+                                                <span> <%=moment(item.meta.createAt).format("YYYY-MM-DD HH:mm:ss") %></span>
+                                                <span> 阅读 <%=item.pv%> 次</span>
+                                            </div>
                                         </a>
                                     </li>
-                                    <% }) %>
+                                <% }) %>
                             </ul>
                             <% if (pageNow<=totalPage) { %>
                                 <nav aria-label="Page navigation" class="col-lg-12">
@@ -59,7 +64,9 @@
                                     <span class="page-count">共 <%=recordAmount%>条记录，<%=totalPage%>页</span>
                                   </ul>
                                 </nav>
-                            <% } %>
+                            <% }else{ %>
+                                <p class="col-lg-12 no-data">暂无数据</p>
+                            <%}%>
                         </div>
                     </div>
                 </div>
