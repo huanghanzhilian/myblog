@@ -66,7 +66,7 @@ exports.index = function(req, res) {
 
 
 // search page
-exports.search = function(req, res) {
+exports.search = function(req, res,next) {
     //拿到搜索关键字
     var q = req.query.q
     //拿到分类id
@@ -95,6 +95,7 @@ exports.search = function(req, res) {
             })
             .exec(function(err, articlesbox) {
                 if (err) {
+                    return next(err)
                     console.log(err)
                 }
                 Promise.all([

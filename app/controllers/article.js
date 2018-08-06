@@ -16,18 +16,14 @@ exports.detail = function(req, res,next) {
     	.populate('categoryid', 'name')
         .exec(function(err, article) {
             if (err) {
-              console.log('22222222222222')
               return next(err)
-              
             }
              //每次访问更新pv
-    Article.update({_id: id}, {$inc: {pv: 1}}, function(err) {
-        if (err) {
-          console.log('111111111111111')
-           return next(err)
-        }
-    })
-            console.log('===========2222222222=======')
+            Article.update({_id: id}, {$inc: {pv: 1}}, function(err) {
+                if (err) {
+                   return next(err)
+                }
+            })
             Comment
             .find({article: id},null,{sort:{_id:-1}})
             .populate('from', 'name')
@@ -54,7 +50,6 @@ exports.detail = function(req, res,next) {
                   var settings = data[4][0]||{};//得到网站配置信息
                   
                   article.content=md.render(article.content);
-                  console.log(article.content)
                   res.render('web/article', {
                       createAt:moment(article.meta.createAt).format("YYYY-MM-DD"),
                       title: article.title,

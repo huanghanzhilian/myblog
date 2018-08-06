@@ -111,9 +111,11 @@ module.exports = function(app) {
 
     // error handlers
     app.use(function(err, req, res, next) {
-        var code = err.status || 500;
+        console.log(err)
+        // var code = err.status || 500;
+        // console.log(code)
             // message = code === 404 ? res.__('error.404_1') : res.__('error.404_2');
-        res.status(code);
+        res.status(404);
         //logger.errLogger(req, err);
         res.send('404');
     });
