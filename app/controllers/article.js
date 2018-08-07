@@ -11,7 +11,7 @@ const md = require('markdown-it')();
 // detail page 文章详情页
 exports.detail = function(req, res,next) {
 	var id = req.params.id;
-	  
+
     Article.findById(id)
     	.populate('categoryid', 'name')
         .exec(function(err, article) {
@@ -48,7 +48,7 @@ exports.detail = function(req, res,next) {
                   var newComments=data[3];
 
                   var settings = data[4][0]||{};//得到网站配置信息
-                  
+
                   article.content=md.render(article.content);
                   res.render('web/article', {
                       createAt:moment(article.meta.createAt).format("YYYY-MM-DD"),
@@ -70,7 +70,7 @@ exports.detail = function(req, res,next) {
                 })
 
 
-                  
+
             })
         })
 

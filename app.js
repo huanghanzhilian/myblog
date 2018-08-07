@@ -1,14 +1,21 @@
-const path = require('path');//路径
-const express = require('express');//web框架
+const path = require('path');                                             //路径
+const express = require('express');                                       //web框架
 
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose'); // 加载mongoose模块
+const mongoose = require('mongoose');                                     // 加载mongoose模块
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const mongoStore = require('connect-mongo')(session); //会话持久
+const mongoStore = require('connect-mongo')(session);                     //会话持久
+const logger=require('morgan');                                           //日志中间件
 
 var port = process.env.PORT || 3001; // 设置端口号：3001
-var dbUrl = 'mongodb://localhost:27017/huangblog';
+
+var dbUrl = 'mongodb://blog:blog@127.0.0.1:19999/huangblog';
+var env = process.env.NODE_ENV|| 'development'
+
+if(env==='development'){
+    dbUrl = 'mongodb://localhost:27017/huangblog';
+}
 
 const routes = require('./routes')
 const pkg = require('./package')
@@ -40,6 +47,14 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
+
+//app.use(logger('short'));
+if('development'===app.get('env')){
+    app.set('showStackError',true);//打印错误信息
+    app.use(logger(':method :url :status'))//中间件
+    app.locals.pretty=true;//格式化代码
+    mongoose.set('debug',true)//数据库日志
+}
 
 // 路由
 require('./routes')(app);

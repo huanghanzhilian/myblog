@@ -111,12 +111,13 @@ module.exports = function(app) {
 
     // error handlers
     app.use(function(err, req, res, next) {
-        console.log(err)
-        // var code = err.status || 500;
-        // console.log(code)
-            // message = code === 404 ? res.__('error.404_1') : res.__('error.404_2');
-        res.status(404);
-        //logger.errLogger(req, err);
-        res.send('404');
+        // console.log('=============')
+        // console.log(err)
+        var code = err.status || 500,
+        message = code === 404 ? '请求的页面已失联~系统已自动记录该错误。' : '服务器出现故障';
+        res.render('web/error', {
+            code: code,
+            message: message
+        });
     });
 }

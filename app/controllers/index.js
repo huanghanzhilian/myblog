@@ -37,7 +37,6 @@ exports.index = function(req, res) {
             var hasNextPage=page<totalPage;//是否有下一页
             var prePage=page==1||page>totalPage?0:page-1;
             var nextPage=page>=totalPage?0:page+1;
-            console.log(results)
             res.render('web/index', {
                 title: '首页',
 
@@ -96,7 +95,6 @@ exports.search = function(req, res,next) {
             .exec(function(err, articlesbox) {
                 if (err) {
                     return next(err)
-                    console.log(err)
                 }
                 Promise.all([
                     Category.find().exec(),
