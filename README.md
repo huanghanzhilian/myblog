@@ -154,3 +154,5 @@ bcrypt
 react-native
 
 开发后台api 使用vue开发前端
+
+es6
